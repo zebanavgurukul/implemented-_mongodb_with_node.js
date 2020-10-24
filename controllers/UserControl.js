@@ -3,8 +3,8 @@ const UserModel = require("../models/UserModel");
 module.exports = {
     create : (req, res) => {
         let user = new UserModel ({
-            forename : req.body.forename,
-            surnaame : req.body.surnaame,
+            First_Name : req.body.First_Name,
+            Last_Name : req.body.Last_Name,
             email : req.body.email,
             password :req.body.password,
             age : req.body.age,
@@ -19,7 +19,7 @@ module.exports = {
             });
     },
     update : (req,res) => {
-        UserModel.update({_id : req.body._id},req.body)
+        UserModel.findByIdAndUpdate({_id : req.params._id},req.body)
         .then(user => {
             res.json(user);
         })
@@ -37,7 +37,7 @@ module.exports = {
         })
     },
     getID : (req,res) => {
-        UserModel.findById({_id : req.body._id})
+        UserModel.findById({_id : req.params._id})
         .then(result => {
             res.json({ success : true, result : result});
         })
@@ -46,7 +46,7 @@ module.exports = {
         })
     },
     delete : (req, res) =>{
-        UserModel.remove({_id : req.body._id})
+        UserModel.findByIdAndRemove({_id : req.params._id})
         .then((result) => {
             res.json({ success : true, result : result})
         })

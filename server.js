@@ -20,12 +20,13 @@ const UserControl = require("./controllers/UserControl");
 
 // Routes
 app.post("/api/user/create", UserControl.create);
-app.put("/api/user/update", UserControl.update);
+app.put("/api/user/update/:_id", UserControl.update);
 app.get("/api/user/get", UserControl.get);
-app.get("/api/user/getID", UserControl.getID)
-app.delete("/api/user/delete", UserControl.delete);
+app.get("/api/user/getID/:_id", UserControl.getID)
+app.delete("/api/user/delete/:_id", UserControl.delete);
 
 // start server
-app.listen(3000, () => {
-    console.log("server has started on port 3000....")
-});
+const PORT = process.env.PORT;
+app.listen(PORT,()=>{
+ console.log(`Server Running on port ${PORT}`);
+})
